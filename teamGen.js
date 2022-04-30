@@ -25,7 +25,7 @@ const playerQuestions = [
     type: "list",
     message: "What type of character are you playing?",
     name: "charType",
-    choices: ["Fighter", "Monk", "Druid", "Warlock", "Blood Hunter", "Ranger", "Socerer"],
+    choices: ["Artificer", "Barbarian", "Bard", "Blood Hunter", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Socerer", "Warlock", "Wizard"],
   },
   {
     type: "input",
@@ -70,7 +70,23 @@ const playerQuestions = [
 ];
 
 //Class questions
-const artQuestions = [];
+const artQuestions = [
+  {
+    type: "input",
+    message: "What type of specialist are you?",
+    name: "artSpec",
+  },
+  {
+    type: "input",
+    message: "What infusions do you know?",
+    name: "infu",
+  },
+  {
+    type: "input",
+    message: "What infused items do you have?",
+    name: "infuItems",
+  }
+];
 const barbQuestions = [];
 const bardQuestions = [];
 const bldhntQuestions = [
@@ -197,6 +213,30 @@ function getSetInfo() {
   inq.prompt(playerQuestions).then((response) => {
     //Retrive info bases on class
     if (response.charType === "Artificer") {
+      inq.prompt(artQuestions).then((artResponse) => {
+        const char = new artificer(
+          response.playerName,
+          response.charName,
+          response.hp,
+          response.ac,
+          response.init,
+          response.speed,
+          response.spellSlot,
+          response.spellsKnown,
+          artResponse.artSpec,
+          artResponse.infu,
+          artResponse.infuItems
+        );
+        generateCard(char);
+        inq.prompt(fromTheTop).then((ans) => {
+          if (ans.moreChar === "Yes") {
+            getSetInfo();
+          } else {
+            finishingStroke();
+            console.log("Check index.html in the output folder for your team!");
+          }
+        });
+      });
 
     } else if (response.charType === "Barbarian") {
 
@@ -392,33 +432,17 @@ function generateCard(daChar) {
   let img;
   let imgDesc;
   // class spec
+  if (daChar.getRole() === "Artificer") {
+    img = "../imgs/Artificer.jpg";
+    imgDesc = "Artificer img";
+    charColor = "artCard";
+    spec = `Artificer Specialization: ${daChar.getArtSpec()}</li>
+    <li class="list-group-item">Infusions Known: ${daChar.getInfu()}</li>
+    <li class="list-group-item">Infused Items: ${daChar.getInfuItems()}`;
 
-  } else if (daChar.getRole() === "Warlock") {
-    img = "../imgs/Warlock.jpg";
-    imgDesc = "Warlock img";
-    charColor = "warCard";
-    spec = `Patron: ${daChar.getPatron()}</li>
-    <li class="list-group-item">Eldritch Invocation: ${daChar.getEldinvo()}`;
+  } else if (daChar.getRole() === "Barbarian") {
 
-  } else if (daChar.getRole() === "Druid") {
-    img = "../imgs/Druid.jpg";
-    imgDesc = "Druid img";
-    charColor = "druCard";
-    spec = `Druid Circle: ${daChar.getDruidCircle()}`;
-
-  } else if (daChar.getRole() === "Monk") {
-    img = "../imgs/Monk.jpg";
-    imgDesc = "Monk img";
-    charColor = "monCard";
-    spec = `Ki Points: ${daChar.getKi()}</li>
-    <li class="list-group-item"> Monastic Traditon: ${daChar.getMontra()}`;
-
-  } else if (daChar.getRole() === "Fighter") {
-    img = "../imgs/Fighter.jpg";
-    imgDesc = "Fighter img";
-    charColor = "figCard";
-    spec = `Fighting Style: ${daChar.getFytestyle()}</li>
-    <li class="list-group-item">Martial Archetype: ${daChar.getMartilArc()}`;
+  } else if (daChar.getRole() === "Bard") {
 
   } else if (daChar.getRole() === "Blood Hunter") {
     img = "../imgs/BloodHunter.jpg";
@@ -428,14 +452,30 @@ function generateCard(daChar) {
     <li class="list-group-item">Blood Rites: ${daChar.getRites()}</li>
     <li class="list-group-item">Hunter Order: ${daChar.getOrder()}</li>
     <li class="list-group-item">Blood Curses: ${daChar.getCurses()}`;
-    console.log(daChar.getCurses());
 
-  } else if (daChar.getRole() === "Socerer") {
-    img = "../imgs/Socerer.jpg";
-    imgDesc = "Socerer img";
-    charColor = "socCard";
-    spec = `Sorcerous Origin: ${daChar.getSocOrigin()}</li>
-    <li class="list-group-item">Sorcery Points: ${daChar.getSocPoints()}`;
+  } else if (daChar.getRole() === "Bard") {
+
+  } else if (daChar.getRole() === "Druid") {
+    img = "../imgs/Druid.jpg";
+    imgDesc = "Druid img";
+    charColor = "druCard";
+    spec = `Druid Circle: ${daChar.getDruidCircle()}`;
+
+  }  else if (daChar.getRole() === "Fighter") {
+    img = "../imgs/Fighter.jpg";
+    imgDesc = "Fighter img";
+    charColor = "figCard";
+    spec = `Fighting Style: ${daChar.getFytestyle()}</li>
+    <li class="list-group-item">Martial Archetype: ${daChar.getMartilArc()}`;
+
+  }  else if (daChar.getRole() === "Monk") {
+    img = "../imgs/Monk.jpg";
+    imgDesc = "Monk img";
+    charColor = "monCard";
+    spec = `Ki Points: ${daChar.getKi()}</li>
+    <li class="list-group-item"> Monastic Traditon: ${daChar.getMontra()}`;
+
+  } else if (daChar.getRole() === "Paladin") {
 
   } else if (daChar.getRole() === "Ranger") {
     img = "../imgs/Ranger.jpg";
@@ -444,6 +484,24 @@ function generateCard(daChar) {
     spec = `Fighting Style: ${daChar.getFytestyle()}</li>
     <li class="list-group-item">Ranger Archetype: ${daChar.getRangArc()}`;
     
+  } else if (daChar.getRole() === "Rogue") {
+
+  } else if (daChar.getRole() === "Socerer") {
+    img = "../imgs/Socerer.jpg";
+    imgDesc = "Socerer img";
+    charColor = "socCard";
+    spec = `Sorcerous Origin: ${daChar.getSocOrigin()}</li>
+    <li class="list-group-item">Sorcery Points: ${daChar.getSocPoints()}`;
+
+  } else if (daChar.getRole() === "Warlock") {
+    img = "../imgs/Warlock.jpg";
+    imgDesc = "Warlock img";
+    charColor = "warCard";
+    spec = `Patron: ${daChar.getPatron()}</li>
+    <li class="list-group-item">Eldritch Invocation: ${daChar.getEldinvo()}`;
+
+  } else if (daChar.getRole() === "Wizard") {
+
   }
 
   charCard += `<div class="${charColor}">\n`;

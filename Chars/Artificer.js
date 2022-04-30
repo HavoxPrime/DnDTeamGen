@@ -10,26 +10,27 @@ class Artificer extends player {
     speed,
     spellSlot,
     spellsKnown,
-    infusions,
-    infusedItems
+    infu,
+    infuItems,
+    artSpec,
   ) {
     super(playerName, charName, hp, ac, init, speed, spellSlot, spellsKnown);
-    // if (typeof officeNum !== "number" || isNaN(officeNum) || officeNum < 0) {
-    //   throw new Error(
-    //     "Expected parameter 'officeNum' to be a non-negative number"
-    //   );
-    // }
 
-    this.infusions = infusions;
-    this.infusedItems = infusedItems;
+    this.infu = infu;
+    this.infuItems = infuItems;
+    this.artSpec =artSpec;
   }
 
-  getinfu() {
-    return this.infusions;
+  getInfu() {
+    return this.infu;
   }
 
-  getinfud() {
-    return this.infusedItems;
+  getInfuItems() {
+    return this.infuItems;
+  }
+
+  getArtSpec() {
+    return this.artSpec;
   }
 
   getRole() {
