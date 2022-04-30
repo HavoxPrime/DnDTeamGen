@@ -251,7 +251,13 @@ const warQuestions = [
     name: "eldInvo",
   },
 ];
-const wisQuestions = [];
+const wisQuestions = [
+  {
+    type: "input",
+    message: "What is your Arcane Tradition?",
+    name: "arcTrad",
+  }
+];
 
 const fromTheTop = [
   {
@@ -596,7 +602,28 @@ function getSetInfo() {
         });
       });
     } else if (response.charType === "Wizard") {
-      
+      inq.prompt(wisQuestions).then((wisResponse) => {
+        const char = new wizard(
+          response.playerName,
+          response.charName,
+          response.hp,
+          response.ac,
+          response.init,
+          response.speed,
+          response.spellSlot,
+          response.spellsKnown,
+          wisResponse.arcTrad,
+        );
+        generateCard(char);
+        inq.prompt(fromTheTop).then((ans) => {
+          if (ans.moreChar === "Yes") {
+            getSetInfo();
+          } else {
+            finishingStroke();
+            console.log("Check index.html in the output folder for your team!");
+          }
+        });
+      });
     }
   });
 }
@@ -703,7 +730,10 @@ function generateCard(daChar) {
     <li class="list-group-item">Eldritch Invocation: ${daChar.getEldinvo()}`;
 
   } else if (daChar.getRole() === "Wizard") {
-
+    img = "../imgs/Wizard.jpg";
+    imgDesc = "Wizard img";
+    charColor = "wisCard";
+    spec = `Arcane Tradition: ${daChar.getArcTrad()}}`;
   }
 //somethin above messed up
   charCard += ` <div class="${charColor}">\n`;
