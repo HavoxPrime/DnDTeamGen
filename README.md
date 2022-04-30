@@ -1,4 +1,4 @@
-# teamProfileGenHW![license badge](https://img.shields.io/badge/License-No%20License-red?style=for-the-badge)
+# teamCardGen![license badge](https://img.shields.io/badge/License-No%20License-red?style=for-the-badge)
 
 ## Description
 
@@ -21,5 +21,7 @@ Making a page with info on teammates.
 ## License
 
 No License
+
 # DnDTeamGen
+
 # DnDTeamGen

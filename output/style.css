@@ -1,0 +1,92 @@
+body {
+  background-color: black;
+}
+
+.title {
+  color: white;
+  text-align: center;
+  font-size: 90px;
+  font-weight: 650;
+  background-color: rgb(80, 79, 79);
+  padding: 20px;
+  font-family: "Press Start 2P", cursive;
+}
+
+.col {
+  max-width: 500px;
+}
+
+img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.list-group-item {
+  font-size: large;
+  background-color: darkgray;
+}
+
+.card-title {
+  font-size: x-large;
+  background-color: darkgray;
+  border-bottom: solid black 2px;
+}
+
+.row {
+  color: white;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+#flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 9000px;
+  max-height: 9000px;
+}
+.card {
+  background-color: darkgray;
+}
+.warCard {
+  background-color: rgb(71, 51, 80);
+  display: inline-flex;
+  margin: 10px;
+}
+.figCard {
+  background-color: rgb(83, 86, 235);
+  display: inline-flex;
+  margin: 10px;
+}
+.druCard {
+  background-color: rgb(1, 73, 7);
+  display: inline-flex;
+  margin: 10px;
+}
+.monCard {
+  background-color: rgb(177, 159, 0);
+  display: inline-flex;
+  margin: 10px;
+}
+.bldhntCard {
+  background-color: rgb(139, 7, 7);
+  display: inline-flex;
+  margin: 10px;
+}
+.socCard {
+  background-color: rgb(6, 3, 194);
+  display: inline-flex;
+  margin: 10px;
+}
+.rangCard {
+  background-color: rgb(0, 177, 9);
+  display: inline-flex;
+  margin: 10px;
+}
+.list-group-item {
+  font-weight: bolder;
+  background-color: rgb(209, 209, 209);
+  max-width: 400px;
+}
+.cardTitle {
+  font-family: "Press Start 2P", cursive;
+  color: white;
+}

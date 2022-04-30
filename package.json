@@ -1,0 +1,27 @@
+{
+  "name": "teamcardgen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node teamGen.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HavoxPrime/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  },
+  "dependencies": {
+    "validator": "^13.6.0",
+    "inquirer": "^8.1.2"
+  },
+  "bugs": {
+    "url": "https://github.com/HavoxPrime//issues"
+  },
+  "homepage": "https://github.com/HavoxPrime/#readme"
+}
