@@ -286,6 +286,29 @@ function getSetInfo() {
       });
 
     } else if (response.charType === "Bard") {
+      inq.prompt(bardQuestions).then((bardResponse) => {
+        const char = new bard(
+          response.playerName,
+          response.charName,
+          response.hp,
+          response.ac,
+          response.init,
+          response.speed,
+          response.spellSlot,
+          response.spellsKnown,
+          bardResponse.bardIns,
+          bardResponse.bardSch
+        );
+        generateCard(char);
+        inq.prompt(fromTheTop).then((ans) => {
+          if (ans.moreChar === "Yes") {
+            getSetInfo();
+          } else {
+            finishingStroke();
+            console.log("Check index.html in the output folder for your team!");
+          }
+        });
+      });
       
     } else if (response.charType === "Blood Hunter") {
       inq.prompt(bldhntQuestions).then((bldhntResponse) => {
@@ -469,7 +492,7 @@ function getSetInfo() {
     }
   });
 }
-
+// somethin below messed up
 function generateCard(daChar) {
   let charCard;
   let spec;
@@ -493,6 +516,11 @@ function generateCard(daChar) {
     <li class="list-group-item">PrimalPath: ${daChar.getPriPath()}`;
 
   } else if (daChar.getRole() === "Bard") {
+    img = "../imgs/Bard.jpg";
+    imgDesc = "Bard img";
+    charColor = "bardCard";
+    spec = `Total Insperations: ${daChar.getBardIns()}</li>
+    <li class="list-group-item">Bard School: ${daChar.getBardSch()}`;
 
   } else if (daChar.getRole() === "Blood Hunter") {
     img = "../imgs/BloodHunter.jpg";
@@ -553,24 +581,24 @@ function generateCard(daChar) {
   } else if (daChar.getRole() === "Wizard") {
 
   }
-
-  charCard += `<div class="${charColor}">\n`;
-  charCard += `<img src="${img}" class="card-img-top" alt="${imgDesc}" />\n`;
-  charCard += `<div class="card-body">\n`;
-  charCard += `<h5 class="cardTitle">${daChar.getRole()}</h5>\n`;
-  charCard += `</div>\n`;
-  charCard += `<ul class="list-group list-group-flush">\n`;
-  charCard += `<li class="list-group-item">Name: ${daChar.getCharName()}</li>\n`; //name
-  charCard += `<li class="list-group-item">Player: ${daChar.getPlayerName()}</li>\n`;
-  charCard += `<li class="list-group-item">HP: ${daChar.getHp()}</li>\n`;
-  charCard += `<li class="list-group-item">AC: ${daChar.getAc()}</li>\n`;
-  charCard += `<li class="list-group-item">Initiative: +${daChar.getInit()}</li>\n`;
-  charCard += `<li class="list-group-item">Speed: ${daChar.getSpeed()}</li>\n`;
-  charCard += `<li class="list-group-item">Spell Slots: ${daChar.getSpellSlots()}</li>\n`;
-  charCard += `<li class="list-group-item">Spells Known: ${daChar.getSpellsKnown()}</li>\n`;
-  charCard += `<li class="list-group-item">${spec}</li>\n`; //spec propteries
-  charCard += `</ul>\n`;
-  charCard += `</div>\n`;
+//somethin above messed up
+  charCard += ` <div class="${charColor}">\n`;
+  charCard += `   <img src="${img}" class="card-img-top" alt="${imgDesc}" />\n`;
+  charCard += `   <div class="card-body">\n`;
+  charCard += `     <h5 class="cardTitle">${daChar.getRole()}</h5>\n`;
+  charCard += `   </div>\n`;
+  charCard += `   <ul class="list-group list-group-flush">\n`;
+  charCard += `     <li class="list-group-item">Name: ${daChar.getCharName()}</li>\n`; //name
+  charCard += `     <li class="list-group-item">Player: ${daChar.getPlayerName()}</li>\n`;
+  charCard += `     <li class="list-group-item">HP: ${daChar.getHp()}</li>\n`;
+  charCard += `     <li class="list-group-item">AC: ${daChar.getAc()}</li>\n`;
+  charCard += `     <li class="list-group-item">Initiative: +${daChar.getInit()}</li>\n`;
+  charCard += `     <li class="list-group-item">Speed: ${daChar.getSpeed()}</li>\n`;
+  charCard += `     <li class="list-group-item">Spell Slots: ${daChar.getSpellSlots()}</li>\n`;
+  charCard += `     <li class="list-group-item">Spells Known: ${daChar.getSpellsKnown()}</li>\n`;
+  charCard += `     <li class="list-group-item">${spec}</li>\n`; //spec propteries
+  charCard += `   </ul>\n`;
+  charCard += ` </div>\n`;
   charCard += `\n`;
   allCards += charCard;
 }
