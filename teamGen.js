@@ -87,8 +87,30 @@ const artQuestions = [
     name: "infuItems",
   }
 ];
-const barbQuestions = [];
-const bardQuestions = [];
+const barbQuestions = [
+  {
+    type: "number",
+    message: "How many rages do you have?",
+    name: "rages",
+  },
+  {
+    type: "input",
+    message: "What is your Primal Path?",
+    name: "priPath",
+  }
+];
+const bardQuestions = [
+  {
+    type: "number",
+    message: "How many Bardic Inspirations do you have?",
+    name: "bardIns",
+  },
+  {
+    type: "input",
+    message: "What is your Bard Collage?",
+    name: "bardSch",
+  }
+];
 const bldhntQuestions = [
   {
     type: "input",
@@ -239,6 +261,29 @@ function getSetInfo() {
       });
 
     } else if (response.charType === "Barbarian") {
+      inq.prompt(barbQuestions).then((barbResponse) => {
+        const char = new barbarian(
+          response.playerName,
+          response.charName,
+          response.hp,
+          response.ac,
+          response.init,
+          response.speed,
+          response.spellSlot,
+          response.spellsKnown,
+          barbResponse.rages,
+          barbResponse.priPath
+        );
+        generateCard(char);
+        inq.prompt(fromTheTop).then((ans) => {
+          if (ans.moreChar === "Yes") {
+            getSetInfo();
+          } else {
+            finishingStroke();
+            console.log("Check index.html in the output folder for your team!");
+          }
+        });
+      });
 
     } else if (response.charType === "Bard") {
       
@@ -441,6 +486,11 @@ function generateCard(daChar) {
     <li class="list-group-item">Infused Items: ${daChar.getInfuItems()}`;
 
   } else if (daChar.getRole() === "Barbarian") {
+    img = "../imgs/Barbarian.jpg";
+    imgDesc = "Barbarian img";
+    charColor = "barbCard";
+    spec = `Total Rages: ${daChar.getRages()}</li>
+    <li class="list-group-item">PrimalPath: ${daChar.getPriPath()}`;
 
   } else if (daChar.getRole() === "Bard") {
 
