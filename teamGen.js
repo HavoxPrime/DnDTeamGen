@@ -29,42 +29,42 @@ const playerQuestions = [
   },
   {
     type: "input",
-    message: "What is their character name?",
+    message: "What is your character name?",
     name: "charName",
   },
   {
     type: "input",
-    message: "What is their player name?",
+    message: "What is your name?",
     name: "playerName",
   },
   {
     type: "number",
-    message: "What is their HP?",
+    message: "What is your HP?",
     name: "hp",
   },
   {
     type: "number",
-    message: "What is the their AC?",
+    message: "What is the your AC?",
     name: "ac",
   },
   {
     type: "input",
-    message: "What is their initiatve?",
+    message: "What is your initiatve?",
     name: "init",
   },
   {
     type: "input",
-    message: "What is their speed?",
+    message: "What is your speed?",
     name: "speed",
   },
   {
     type: "input",
-    message: "What are their spell slots?",
+    message: "What are your spell slots?",
     name: "spellSlot",
   },
   {
     type: "input",
-    message: "What are their known spells?",
+    message: "What are your known spells?",
     name: "spellsKnown",
   },
 ];
@@ -114,77 +114,109 @@ const bardQuestions = [
 const bldhntQuestions = [
   {
     type: "input",
-    message: "What is the their fighting style?",
+    message: "What is your fighting style?",
     name: "fyteStyle",
   },
   {
     type: "input",
-    message: "What are their Blood Rites?",
+    message: "What are your Blood Rites?",
     name: "priEsoRites",
   },
   {
     type: "input",
-    message: "What is the their Hunter Order?",
+    message: "What is your Hunter Order?",
     name: "huntOrder",
   },
   {
     type: "input",
-    message: "What are their Blood Curses?",
+    message: "What are your Blood Curses?",
     name: "bloodCurses",
   },
 ];
-const cleQuestions = [];
+const cleQuestions = [
+  {
+    type: "number",
+    message: "How many Divine Charges do you have?",
+    name: "chaDiv",
+  },
+  {
+    type: "input",
+    message: "What is your Divine Domain?",
+    name: "divDom",
+  },
+  {
+    type: "input",
+    message: "Who is your god?",
+    name: "god",
+  }
+];
 const druQuestions = [
   {
     type: "input",
-    message: "What is the their druid circle?",
+    message: "What is your druid circle?",
     name: "druidCircle",
   },
 ];
 const figQuestions = [
   {
     type: "input",
-    message: "What is the their fighting style?",
+    message: "What is your fighting style?",
     name: "fyteStyle",
   },
   {
     type: "input",
-    message: "What is their martial archetype?",
+    message: "What is your martial archetype?",
     name: "martilArc",
-  },
+  }
 ];
 const monQuestions = [
   {
     type: "input",
-    message: "What is their Ki Point maximum?",
+    message: "What is your Ki Point maximum?",
     name: "ki",
   },
   {
     type: "input",
-    message: "What is their monastic tradition?",
+    message: "What is your monastic tradition?",
     name: "monTra",
   },
 ];
-const palQuestions = [];
-const rangQuestions = [
+const palQuestions = [
   {
-    type: "input",
-    message: "What is the their favored enemy?",
-    name: "favEnemy",
+    type: "number",
+    message: "How much hp in your Lay on Hands pool?",
+    name: "layHand",
   },
   {
     type: "input",
-    message: "What is their Favored terrain?",
-    name: "favGround",
-  },
-  {
-    type: "input",
-    message: "What is the their fighting style?",
+    message: "What is your fighting style?",
     name: "fyteStyle",
   },
   {
     type: "input",
-    message: "What is their Ranger archetype?",
+    message: "What is your Sacred Oath?",
+    name: "sacOath",
+  }
+];
+const rangQuestions = [
+  {
+    type: "input",
+    message: "What is your favored enemy?",
+    name: "favEnemy",
+  },
+  {
+    type: "input",
+    message: "What is your Favored terrain?",
+    name: "favGround",
+  },
+  {
+    type: "input",
+    message: "What is your fighting style?",
+    name: "fyteStyle",
+  },
+  {
+    type: "input",
+    message: "What is your Ranger archetype?",
     name: "rangArc",
   },
 ];
@@ -192,7 +224,7 @@ const rogQuestions = [];
 const socQuestions = [
   {
     type: "input",
-    message: "What is the their origin?",
+    message: "What is your origin?",
     name: "socOrigin",
   },
   {
@@ -204,12 +236,12 @@ const socQuestions = [
 const warQuestions = [
   {
     type: "input",
-    message: "What is the their patron?",
+    message: "What is your patron?",
     name: "patron",
   },
   {
     type: "input",
-    message: "What are their eldritch invocations?",
+    message: "What are your eldritch invocations?",
     name: "eldInvo",
   },
 ];
@@ -337,6 +369,30 @@ function getSetInfo() {
         });
       });
     } else if (response.charType === "Cleric") {
+      inq.prompt(cleQuestions).then((cleResponse) => {
+        const char = new cleric(
+          response.playerName,
+          response.charName,
+          response.hp,
+          response.ac,
+          response.init,
+          response.speed,
+          response.spellSlot,
+          response.spellsKnown,
+          cleResponse.chaDiv,
+          cleResponse.divDom,
+          cleResponse.god
+        );
+        generateCard(char);
+        inq.prompt(fromTheTop).then((ans) => {
+          if (ans.moreChar === "Yes") {
+            getSetInfo();
+          } else {
+            finishingStroke();
+            console.log("Check index.html in the output folder for your team!");
+          }
+        });
+      });
       
     } else if (response.charType === "Druid") {
       inq.prompt(druQuestions).then((druResponse) => {
@@ -410,6 +466,30 @@ function getSetInfo() {
         });
       });
     } else if (response.charType === "Paladin") {
+      inq.prompt(palQuestions).then((palResponse) => {
+        const char = new paladin(
+          response.playerName,
+          response.charName,
+          response.hp,
+          response.ac,
+          response.init,
+          response.speed,
+          response.spellSlot,
+          response.spellsKnown,
+          palResponse.layHand,
+          palResponse.fyteStyle,
+          palResponse.sacOath
+        );
+        generateCard(char);
+        inq.prompt(fromTheTop).then((ans) => {
+          if (ans.moreChar === "Yes") {
+            getSetInfo();
+          } else {
+            finishingStroke();
+            console.log("Check index.html in the output folder for your team!");
+          }
+        });
+      });
       
     } else if (response.charType === "Ranger") {
       inq.prompt(rangQuestions).then((rangResponse) => {
@@ -531,7 +611,13 @@ function generateCard(daChar) {
     <li class="list-group-item">Hunter Order: ${daChar.getOrder()}</li>
     <li class="list-group-item">Blood Curses: ${daChar.getCurses()}`;
 
-  } else if (daChar.getRole() === "Bard") {
+  } else if (daChar.getRole() === "Cleric") {
+    img = "../imgs/Cleric.jpg";
+    imgDesc = "Cleric img";
+    charColor = "cleCard";
+    spec = `Divine Charges: ${daChar.getChaDiv()}</li>
+    <li class="list-group-item">Divine Domain: ${daChar.getDivDom()}</li>
+    <li class="list-group-item">God: ${daChar.getGod()}`;
 
   } else if (daChar.getRole() === "Druid") {
     img = "../imgs/Druid.jpg";
@@ -554,6 +640,12 @@ function generateCard(daChar) {
     <li class="list-group-item"> Monastic Traditon: ${daChar.getMontra()}`;
 
   } else if (daChar.getRole() === "Paladin") {
+    img = "../imgs/Paladin.jpg";
+    imgDesc = "Paladin img";
+    charColor = "palCard";
+    spec = `Total Lay on Hands Pool: ${daChar.getLayHand()}</li>
+    <li class="list-group-item">Fighting Style: ${daChar.getFytestyle()}</li>
+    <li class="list-group-item">Sacred Oath: ${daChar.getSacOath()}`;
 
   } else if (daChar.getRole() === "Ranger") {
     img = "../imgs/Ranger.jpg";
