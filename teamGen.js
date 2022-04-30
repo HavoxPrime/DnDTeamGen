@@ -218,9 +218,15 @@ const rangQuestions = [
     type: "input",
     message: "What is your Ranger archetype?",
     name: "rangArc",
-  },
+  }
 ];
-const rogQuestions = [];
+const rogQuestions = [
+  {
+    type: "input",
+    message: "What is your Roguish Archetype?",
+    name: "rogArc",
+  }
+];
 const socQuestions = [
   {
     type: "input",
@@ -518,6 +524,28 @@ function getSetInfo() {
         });
       });
     } else if (response.charType === "Rogue") {
+      inq.prompt(rogQuestions).then((rogResponse) => {
+        const char = new rogue(
+          response.playerName,
+          response.charName,
+          response.hp,
+          response.ac,
+          response.init,
+          response.speed,
+          response.spellSlot,
+          response.spellsKnown,
+          rogResponse.rogArc,
+        );
+        generateCard(char);
+        inq.prompt(fromTheTop).then((ans) => {
+          if (ans.moreChar === "Yes") {
+            getSetInfo();
+          } else {
+            finishingStroke();
+            console.log("Check index.html in the output folder for your team!");
+          }
+        });
+      });
       
     } else if (response.charType === "Socerer") {
       inq.prompt(socQuestions).then((socResponse) => {
@@ -655,6 +683,10 @@ function generateCard(daChar) {
     <li class="list-group-item">Ranger Archetype: ${daChar.getRangArc()}`;
     
   } else if (daChar.getRole() === "Rogue") {
+    img = "../imgs/Rogue.jpg";
+    imgDesc = "Rogue img";
+    charColor = "rogCard";
+    spec = `Roguish Architype: ${daChar.getRogArc()}}`;
 
   } else if (daChar.getRole() === "Socerer") {
     img = "../imgs/Socerer.jpg";
