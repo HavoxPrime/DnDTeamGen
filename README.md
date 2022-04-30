@@ -4,19 +4,13 @@
 
 This is a Team card generator that makes and html doc with basic info provided by the user.
 
-![Example Team](https://raw.githubusercontent.com/HavoxPrime/teamProfileGenHW/main/imgs/exampleTeam.png)
+![Example Team](imgs\Example_Team.png)
 
--When index.js is run the user is prompted for information like Name and Id
-
--I didn't have to many problems but flexboxes scare me.
+-When index.js is run the user is prompted for information like Charecter Name, HP, and AC.
 
 ## Usage
 
-Making a page with info on teammates.
-
-## Video
-
-[Click here for video](https://youtu.be/IR6KZc2PO6Y)
+This is for making a page with info on teammates, their abilities, and spells.
 
 ## License
 
