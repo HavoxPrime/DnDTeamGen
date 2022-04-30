@@ -1,26 +1,8 @@
 const player = require("./Player.js");
 
 class BloodHunter extends player {
-  constructor(
-    playerName,
-    charName,
-    hp,
-    ac,
-    init,
-    speed,
-    spellSlot,
-    spellsKnown,
-    fyteStyle,
-    priEsoRites,
-    huntOrder,
-    bloodCurses
-  ) {
+  constructor(playerName,charName,hp,ac,init,speed,spellSlot,spellsKnown,fyteStyle,priEsoRites,huntOrder,bloodCurses) {
     super(playerName, charName, hp, ac, init, speed, spellSlot, spellsKnown);
-    // if (typeof officeNum !== "number" || isNaN(officeNum) || officeNum < 0) {
-    //   throw new Error(
-    //     "Expected parameter 'officeNum' to be a non-negative number"
-    //   );
-    // }
 
     this.fyteStyle = fyteStyle;
     this.priEsoRites = priEsoRites;

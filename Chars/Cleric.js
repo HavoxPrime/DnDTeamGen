@@ -1,20 +1,7 @@
 const player = require("./Player.js");
 
 class Cleric extends player {
-  constructor(
-    playerName,
-    charName,
-    hp,
-    ac,
-    init,
-    speed,
-    spellSlot,
-    spellsKnown,
-    chaDiv,
-    divDom,
-    god
-
-  ) {
+  constructor(playerName,charName,hp,ac,init,speed,spellSlot,spellsKnown,chaDiv,divDom,god) {
     super(playerName, charName, hp, ac, init, speed, spellSlot, spellsKnown);
 
     this.chaDiv = chaDiv;

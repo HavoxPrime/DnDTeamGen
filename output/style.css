@@ -105,6 +105,7 @@ img {
   display: inline-flex;
   margin: 10px;
   color:white;
+  border: 5px solid white;
 }
 .socCard {
   background-color: rgb(6, 3, 194);

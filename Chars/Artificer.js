@@ -1,19 +1,7 @@
 const player = require("./Player.js");
 
 class Artificer extends player {
-  constructor(
-    playerName,
-    charName,
-    hp,
-    ac,
-    init,
-    speed,
-    spellSlot,
-    spellsKnown,
-    infu,
-    infuItems,
-    artSpec,
-  ) {
+  constructor(playerName,charName,hp,ac,init,speed,spellSlot,spellsKnown,infu,infuItems,artSpec,) {
     super(playerName, charName, hp, ac, init, speed, spellSlot, spellsKnown);
 
     this.infu = infu;

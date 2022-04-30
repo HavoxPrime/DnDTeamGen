@@ -1,19 +1,7 @@
 const player = require("./Player.js");
 
 class Paladin extends player {
-  constructor(
-    playerName,
-    charName,
-    hp,
-    ac,
-    init,
-    speed,
-    spellSlot,
-    spellsKnown,
-    layHand,
-    fyteStyle,
-    sacOath
-  ) {
+  constructor(playerName,charName,hp,ac,init,speed,spellSlot,spellsKnown,layHand,fyteStyle,sacOath) {
     super(playerName, charName, hp, ac, init, speed, spellSlot, spellsKnown);
 
     this.layHand = layHand;

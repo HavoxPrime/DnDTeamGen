@@ -1,18 +1,7 @@
 const player = require("./Player.js");
 
 class Bard extends player {
-  constructor(
-    playerName,
-    charName,
-    hp,
-    ac,
-    init,
-    speed,
-    spellSlot,
-    spellsKnown,
-    bardIns,
-    bardSch
-  ) {
+  constructor(playerName,charName,hp,ac,init,speed,spellSlot,spellsKnown,bardIns,bardSch) {
     super(playerName, charName, hp, ac, init, speed, spellSlot, spellsKnown);
 
     this.bardIns = bardIns;
